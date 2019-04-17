@@ -4,6 +4,8 @@ function createStage(_level,_class,_lesson){
 	let yuedu = courseGetter.getManager();
 	let mainloader = yuedu.loader;
 
+	Lib.loader.defaultTimeout(40000);
+
 	mainloader.addLoadProgress(null,container).set({x:640,y:360});
 
 	mainloader.add(['ui.json','ui.png'],'ui/');

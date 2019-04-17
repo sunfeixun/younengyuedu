@@ -26,6 +26,7 @@ var Lib = Lib||{};
 
 (function() {
 	let mySound;
+	let defaultTimeout = 20000;
 
 	function loader(xhr,basepath,crossorigin) {
 		this.LoadQueue_constructor(xhr,basepath,crossorigin);
@@ -36,6 +37,11 @@ var Lib = Lib||{};
 		this.eleLoadCompFunc = new Array;
 		this.imagePool = {};
 		this.on('complete',onComplete);
+	}
+
+	loader.defaultTimeout = function(time){
+		if(time > 0) defaultTimeout = time;
+		return defaultTimeout;
 	}
 
 	loader.HANDLE_COMPLETE = 'handlecomplete';
@@ -101,7 +107,7 @@ var Lib = Lib||{};
 		}
 
 		for(i=0;i<loadList.length;){
-			loadList[i].loadTimeout = loadList[i].loadTimeout||20000;
+			loadList[i].loadTimeout = loadList[i].loadTimeout||defaultTimeout;
 			if(loadList[i].src.slice(-3)==='.js') loadList[i].type = 'javascript';
 
 
