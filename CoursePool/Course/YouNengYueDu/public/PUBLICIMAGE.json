@@ -1,0 +1,18 @@
+{
+
+"images": [
+    "PUBLICIMAGE.png"
+],
+
+"frames": [
+    [1, 1, 50, 50, 0, 0, 0],
+    [1, 53, 50, 48, 0, 0, 0],
+    [1, 103, 37, 29, 0, 0, 0]
+],
+
+"animations": {
+    "close": { "frames": [0] },
+    "tip": { "frames": [1] },
+    "listen": { "frames": [2] }
+}
+}

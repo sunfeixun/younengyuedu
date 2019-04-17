@@ -1,0 +1,52 @@
+{
+
+"images": [
+    "ui.png"
+],
+
+"frames": [
+    [1, 1, 830, 530, 0, 0, 0],
+    [1, 533, 76, 56, 0, 0, 0],
+    [1, 591, 778, 10, 0, 0, 0],
+    [79, 533, 76, 56, 0, 0, 0],
+    [157, 533, 76, 56, 0, 0, 0],
+    [235, 533, 104, 55, 0, 0, 0],
+    [341, 533, 104, 55, 0, 0, 0],
+    [447, 533, 104, 55, 0, 0, 0],
+    [553, 533, 50, 50, 0, 0, 0],
+    [605, 533, 49, 49, 0, 0, 0],
+    [833, 1, 122, 112, 0, 0, 0],
+    [957, 1, 31, 92, 0, 0, 0],
+    [957, 95, 31, 92, 0, 0, 0],
+    [833, 115, 122, 107, 0, 0, 0],
+    [833, 224, 122, 104, 0, 0, 0],
+    [833, 330, 122, 102, 0, 0, 0],
+    [833, 434, 92, 132, 0, 0, 0]
+],
+
+"animations": {
+    "rect": { "frames": [0] },
+    "guancha": { "frames": [1] },
+    "splitStar": { "frames": [2] },
+    "jiangshu": { "frames": [3] },
+    "qingting": { "frames": [4] },
+    "lijiebiaoda": { "frames": [5] },
+    "yueduyanshen": { "frames": [6] },
+    "guinazongjie": { "frames": [7] },
+    "replay": { "frames": [8] },
+    "charCircle": { "frames": [9] },
+    "tab3": { "frames": [10] },
+    "next": { "frames": [11] },
+    "prev": { "frames": [12] },
+    "tab4": { "frames": [13] },
+    "tab2": { "frames": [14] },
+    "tab1": { "frames": [15] },
+    "back": { "frames": [16] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:37968c61f057e069445502ab543245a1:5a3f253667032705ca37ee42dd58b452:5b04aa198265472a3c5f56958d78e97b$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

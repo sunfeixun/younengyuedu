@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+	<meta charset="UTF-8">
+	<meta charset="utf-8" name="viewport">
+	<!--meta name="viewport" content="width=1280,user-scalable=no" />
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection"-->
+	<title>优能阅读</title>
+	<style type="text/css">
+	body{margin:0px;overflow: hidden;}
+	/*
+		@font-face{
+			font-family: myfont;
+			src:url('font/simkai.ttf');
+		}*/
+	</style>
+	<script type="text/javascript" src="lib/createjs.min.js"></script>
+	<script type="text/javascript" src="CoursePool/lib/myLib.js"></script>
+	<script type="text/javascript" src="CoursePool/courseGetter.js"></script>
+	<script type="text/javascript" src="js/createStage.js"></script>
+</head>
+<body onload="getCourse()">
+<canvas width="1280" height="720" style="background-color: rgba(237,223,215,1);" id="canvas"></canvas>
+<script type="text/javascript">
+	function getCourse() {
+		let courseClass = 'YouNengYueDu/';
+		let _level = sessionStorage.level, _class = sessionStorage.class, _lesson = sessionStorage.lesson;
+
+		courseGetter.definePath({
+			courseClass:'Course/' + courseClass,
+			gamePath:'Course/GAME/',
+			charPath:'Course/CHAR/'
+		});
+
+		courseGetter.getCourse('Course/' + courseClass + 'courseInterface.js');
+
+		courseGetter.on('onready',function(){
+			createStage(_level,_class,_lesson);
+		});
+	}
+</script>
+</body>
+</html>

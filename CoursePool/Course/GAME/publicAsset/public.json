@@ -1,0 +1,14 @@
+{
+
+"images": [
+    "public.png"
+],
+
+"frames": [
+    [1, 1, 51, 54, 0, 0, 0]
+],
+
+"animations": {
+    "reset": { "frames": [0] }
+}
+}
