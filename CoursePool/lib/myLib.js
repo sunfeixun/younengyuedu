@@ -29,6 +29,7 @@ var Lib = Lib||{};
 
 	function loader(xhr,basepath,crossorigin) {
 		this.LoadQueue_constructor(xhr,basepath,crossorigin);
+
 		this.installPlugin(createjs.Sound);
 
 		this.loadList = new Array;

@@ -97,12 +97,17 @@ let charAnimation;
 		let imgLoader = new Lib.loader(false);
 		imgLoader.addLoadProgress(null,this).set({x:width/2,y:height/2 - 50});
 		imgLoader.on('handlecomplete',complete,this);
+		imgLoader.on('error',function(e){log(e)});
+		imgLoader.on('fileerror',function(e){log(e)});
 		imgLoader.add(this.custom.sheetInfo.images,this.custom.fullPath);
 		imgLoader.add([{src:'read.mp3',id:'read'+this.custom.code},{src:'single.mp3',id:'single'+this.custom.code}],this.custom.fullPath);
 		imgLoader.Load();
 		this.custom.mainloader = imgLoader;
 
 		function complete(){
+			this.custom.state = 'finish';
+			this.dispatchEvent('buildup');
+			
 			//创建动画，播放一次动画：'once'，单帧动画: 'pic'和'txt'用于字卡闪烁
 			let sprites = imgLoader.getSprite(this.custom.sheetInfo,true,{x:width/2 + shiftx,y:height/2 + shifty});
 			let once = sprites.once, pic = sprites.pic, txt = sprites.txt;
@@ -149,9 +154,7 @@ let charAnimation;
 
 			this.stage && this.replay();
 
-			this.custom.state = 'finish';
 			delete this.custom.mainloader;
-			this.dispatchEvent('buildup');
 		}
 	}
 
