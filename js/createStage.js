@@ -4,6 +4,8 @@ function createStage(_level,_class,_lesson){
 	let yuedu = courseGetter.getManager();
 	let mainloader = yuedu.loader;
 
+	mainloader.addLoadProgress(null,container).set({x:640,y:360});
+
 	mainloader.add(['ui.json','ui.png'],'ui/');
 	yuedu.on('loadup',function(){buildFrame(yuedu,mainloader,container)},null,true);
 	courseGetter.getManager().loadLesson(_level,_class,_lesson);

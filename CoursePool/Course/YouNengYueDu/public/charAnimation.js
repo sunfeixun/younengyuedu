@@ -94,25 +94,24 @@ let charAnimation;
 		this.custom.sheetInfo = e.target.getResult();
 		this.custom.sheetInfo.framerate = 24;
 
-		let imgLoader = new Lib.loader(true);
+		let imgLoader = new Lib.loader(false);
 		imgLoader.addLoadProgress(null,this).set({x:width/2,y:height/2 - 50});
 		imgLoader.on('handlecomplete',complete,this);
 		imgLoader.add(this.custom.sheetInfo.images,this.custom.fullPath);
-		imgLoader.add([{src:'read.mp3',id:'read'},{src:'single.mp3',id:'single'}],this.custom.fullPath);
+		imgLoader.add([{src:'read.mp3',id:'read'+this.custom.code},{src:'single.mp3',id:'single'+this.custom.code}],this.custom.fullPath);
 		imgLoader.Load();
-
 		this.custom.mainloader = imgLoader;
 
 		function complete(){
 			//创建动画，播放一次动画：'once'，单帧动画: 'pic'和'txt'用于字卡闪烁
 			let sprites = imgLoader.getSprite(this.custom.sheetInfo,true,{x:width/2 + shiftx,y:height/2 + shifty});
 			let once = sprites.once, pic = sprites.pic, txt = sprites.txt;
-			let single = createjs.Sound.play('single').stop();
+			let single = createjs.Sound.play('single'+this.custom.code).stop();
 
 			this.custom.once = once;
 			this.custom.pic = pic;
 			this.custom.txt = txt;
-			this.custom.read = createjs.Sound.play('read').stop();
+			this.custom.read = createjs.Sound.play('read'+this.custom.code).stop();
 			this.custom.single = single;
 			this.addChild(this.custom.word,this.custom.charText);
 
