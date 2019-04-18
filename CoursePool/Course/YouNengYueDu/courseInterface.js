@@ -163,6 +163,7 @@ if(courseGetter){
 			p2.shower.on('removed',p2.onRemove);
 			this.custom.p2 = p2;
 			this.on('removed',onPartRemove);
+			// this.custom.onRemove = function(){this.partid=null};
 		}
 
 		let _p = createjs.extend(part1,createjs.Container);
@@ -170,7 +171,7 @@ if(courseGetter){
 		_p.goSubPart = function(_part){
 			let id = _part;
 			_part = this.custom['p'+_part];
-			if(!_part || id === this.custom.partid) return;
+			if(!_part || (id === this.custom.partid && this.custom._subPart!==undefined)) return;
 
 			this.removeAllChildren();
 			this.addChild(_part.shower);
@@ -413,7 +414,8 @@ if(courseGetter){
 
 				_text = new p.text(_info2.text);
 				_text.warpText(maxTextWidth);
-				_text.y = textTop;
+				// _text.y = textTop;
+				_text.y = (projectData.height - _text.getBounds().height)/2;
 				_text.x = (projectData.width - _text.getBounds().width)/2;
 				p2.shower.addChild(_text);
 
@@ -438,7 +440,8 @@ if(courseGetter){
 
 				_text = new p.text(_info3.text);
 				_text.warpText(maxTextWidth);
-				_text.y = textTop;
+				// _text.y = textTop;
+				_text.y = (projectData.height - _text.getBounds().height)/2;
 				_text.x = (projectData.width - _text.getBounds().width)/2;
 				p3.shower.addChild(_text);
 

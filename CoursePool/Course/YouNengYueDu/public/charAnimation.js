@@ -97,8 +97,14 @@ let charAnimation;
 		let imgLoader = new Lib.loader(false);
 		imgLoader.addLoadProgress(null,this).set({x:width/2,y:height/2 - 50});
 		imgLoader.on('handlecomplete',complete,this);
-		imgLoader.on('error',function(e){log(e)});
-		imgLoader.on('fileerror',function(e){log(e)});
+
+		imgLoader.on('error',function(e){
+			log(e);
+
+			// imgLoader.reset();
+			// imgLoader.Load();
+		});
+
 		imgLoader.add(this.custom.sheetInfo.images,this.custom.fullPath);
 		imgLoader.add([{src:'read.mp3',id:'read'+this.custom.code},{src:'single.mp3',id:'single'+this.custom.code}],this.custom.fullPath);
 		imgLoader.Load();
@@ -109,6 +115,7 @@ let charAnimation;
 			this.dispatchEvent('buildup');
 			
 			//创建动画，播放一次动画：'once'，单帧动画: 'pic'和'txt'用于字卡闪烁
+
 			let sprites = imgLoader.getSprite(this.custom.sheetInfo,true,{x:width/2 + shiftx,y:height/2 + shifty});
 			let once = sprites.once, pic = sprites.pic, txt = sprites.txt;
 			let single = createjs.Sound.play('single'+this.custom.code).stop();
@@ -133,14 +140,14 @@ let charAnimation;
 			},this);
 
 			this.custom.flashTween = new TimelineLite;
-			this.custom.flashTween.to(once,flashDuration,{alpha:0});
+			this.custom.flashTween.to(once,0.1,{alpha:0});
 
 			for(let i=0;i<flashRepeat;i++){
 				this.custom.flashTween.call(readSingle).to(pic,flashDuration,{alpha:1})
-									.to(pic,flashDuration,{alpha:0,delay:flashDelay})
+									.set(pic,{alpha:0,delay:flashDelay})
 									.call(readSingle).to(txt,flashDuration,{alpha:1});
 
-				i<flashRepeat-1 && this.custom.flashTween.to(txt,flashDuration,{alpha:0,delay:flashDelay});
+				i<flashRepeat-1 && this.custom.flashTween.set(txt,{alpha:0,delay:flashDelay});
 			}
 
 			this.custom.flashTween.pause();
@@ -174,6 +181,7 @@ let charAnimation;
 
 	p.flashText = function(){
 		if(!this.custom.readFinish || !this.custom.animateFinish) return;
+		// this.custom.once.alpha = 0;
 		this.custom.flashTween.restart();
 	}
 

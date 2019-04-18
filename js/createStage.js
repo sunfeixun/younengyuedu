@@ -20,15 +20,16 @@ function createStage(_level,_class,_lesson){
 }
 
 function buildFrame(yuedu,loader,root){
+	let bottomContainer = root.addChild(new createjs.Container);
 	let contentContainer = root.addChild(new createjs.Container);
-	let uiContainer = root.addChild(new createjs.Container);
+	let topContainer = root.addChild(new createjs.Container);
 
-	let bottomContainer = uiContainer.addChild(new createjs.Container);
-	let tabContainer = uiContainer.addChild(new createjs.Container);
-	let yueduTabContainer = uiContainer.addChild(new createjs.Container).set({visible:false,cursor:'pointer'});
-	let tishengTabContainer = uiContainer.addChild(new createjs.Container).set({visible:false,cursor:'pointer'});
-	let shiziTabContainer = uiContainer.addChild(new createjs.Container).set({visible:false});
-	let prevNextContainer = uiContainer.addChild(new createjs.Container).set({visible:false,cursor:'pointer'});
+	let qiqiuContainer = bottomContainer.addChild(new createjs.Container);
+	let tabContainer = topContainer.addChild(new createjs.Container);
+	let yueduTabContainer = topContainer.addChild(new createjs.Container).set({visible:false,cursor:'pointer'});
+	let tishengTabContainer = topContainer.addChild(new createjs.Container).set({visible:false,cursor:'pointer'});
+	let shiziTabContainer = topContainer.addChild(new createjs.Container).set({visible:false});
+	let prevNextContainer = topContainer.addChild(new createjs.Container).set({visible:false,cursor:'pointer'});
 
 	let currentTab = null;
 	let nextButton = null, prevButton = null;
@@ -39,18 +40,18 @@ function buildFrame(yuedu,loader,root){
 	let sprite = loader.getSprite('ui',true);
 	let elementData = [
 		{name:'back',attr:{x:1121,y:586},addTo:bottomContainer},
-		{name:'rect',attr:{x:670,y:386}},
+		{name:'rect',attr:{x:670,y:386},addTo:topContainer},
 
 		{name:'tab1',attr:{x:194,y:206,alpha:0.5,part:1,subPartController:yueduTabContainer},addTo:tabContainer},
 		{name:'tab2',attr:{y:320,alpha:0.5,part:2,subPartController:tishengTabContainer}},
 		{name:'tab3',attr:{y:435,alpha:0.5,part:3,subPartController:shiziTabContainer}},
 		{name:'tab4',attr:{y:549,alpha:0.5,part:4}},
 
-		{name:'lijiebiaoda',attr:{x:424,y:73,subPart:1},addTo:yueduTabContainer},
+		{name:'lijiebiaoda',attr:{x:424,y:73,subPart:1},addTo:tishengTabContainer},
 		{name:'guinazongjie',attr:{x:670,subPart:2}},
 		{name:'yueduyanshen',attr:{x:915,subPart:3}},
 
-		{name:'guancha',attr:{x:424,subPart:1},addTo:tishengTabContainer},
+		{name:'guancha',attr:{x:424,subPart:1},addTo:yueduTabContainer},
 		{name:'qingting',attr:{x:670,subPart:2}},
 		{name:'jiangshu',attr:{x:915,subPart:3}},
 
@@ -58,14 +59,18 @@ function buildFrame(yuedu,loader,root){
 		{name:'replay',attr:{x:435,y:448}},
 
 		{name:'next',attr:{x:1056,y:386,alpha:0.2,funcName:'next'},addTo:prevNextContainer},
-		{name:'prev',attr:{x:284,alpha:0.2,funcName:'prev'}}
+		{name:'prev',attr:{x:284,alpha:0.2,funcName:'prev'}},
+		{name:'qiqiu1',attr:{x:1099,y:230},addTo:qiqiuContainer},
+		{name:'qiqiu2',attr:{x:1096,y:318}},
+		{name:'qiqiu3',attr:{x:1113,y:385}}
 	];
+
 	let _ele, _preEle, _parent = null;
 
 	for(let i=0;i<elementData.length;i++){
 		_ele = sprite[elementData[i].name];
 		_parent = elementData[i].addTo === undefined? _parent:elementData[i].addTo;
-		_parent? _parent.addChild(_ele):uiContainer.addChild(_ele);
+		_parent? _parent.addChild(_ele):topContainer.addChild(_ele);
 
 		if(_preEle && elementData[i].attr){
 			if(typeof(elementData[i].attr.x)!=='number') _ele.x = _preEle.x;
@@ -114,6 +119,9 @@ function buildFrame(yuedu,loader,root){
 
 	//识字环节位置调整
 	charAnimation.shiftPosition(-100,-70);
+
+	//气球的功能
+	qiqiuContainer.cursor = 'pointer';
 
 	function goPartByTab(tab){
 		if(tab === currentTab) return;
